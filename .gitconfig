@@ -1,0 +1,27 @@
+[user]
+	email = 70228790+notTamion@users.noreply.github.com
+	name = Tamion
+	signingkey = 01E616386DBAE296
+[commit]
+	gpgsign = true
+[gpg]
+	program = C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
+[core]
+	autocrlf = input
+	longpaths = true
+	editor = vim
+[push]
+	autoSetupRemote = true
+[alias]
+	c = commit -m
+	ac = commit -am
+	pu = pull upstream
+	s = status
+	irb = rebase -i
+	co = checkout
+	r = rebase
+	b = branch
+	rs = restore
+	rss = restore --staged
+	p = push
+	pf = push --force
