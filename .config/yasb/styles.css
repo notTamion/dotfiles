@@ -37,7 +37,7 @@
 .yasb-bar {
 	padding: 0;
 	margin: 0; 
-    background-color: var(--crust)
+    background-color: rgba(17, 17, 27, 0.004);
 }
 .widget {
 	padding: 0 12px;
