@@ -31,9 +31,9 @@ bars:
       bottom: -24
       right: 16
     widgets:
-      left: ["active_window","traffic"]
+      left: ["active_window","heater"]
       center: ["cpu","clock","memory"]
-      right: ["heater","weather","volume","power_menu"]
+      right: ["traffic","weather","volume","power_menu"]
 widgets:
   heater:
     type: "yasb.heater.HeaterWidget"
