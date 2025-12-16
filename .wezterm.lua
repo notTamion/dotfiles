@@ -28,6 +28,11 @@ config.skip_close_confirmation_for_processes_named = {}
 
 local action = wezterm.action
 
+local function get_relative_pane(window, direction)
+	local tab = window:mux_window():active_tab()
+	return tab:get_pane_direction(direction)
+end
+
 config.keys = {
 	{
 		key = "f",
@@ -42,7 +47,7 @@ config.keys = {
 	},
 
 	{
-		key = "k",
+		key = "c",
 		mods = "LEADER",
 		action = action.CloseCurrentTab({ confirm = true }),
 	},
@@ -91,6 +96,98 @@ config.keys = {
 		action = action.SplitPane({
 			direction = "Right",
 		}),
+	},
+	{
+		key = "h",
+		mods = "LEADER",
+		action = wezterm.action_callback(function(window, pane)
+			local relative = get_relative_pane(window, "Left")
+			if relative then
+				window:perform_action(
+					action.AdjustPaneSize({ "Left", math.floor(relative:get_dimensions().cols / 3) }),
+					pane
+				)
+			else
+				relative = get_relative_pane(window, "Right")
+				if relative then
+					window:perform_action(
+						action.AdjustPaneSize({ "Left", math.floor(pane:get_dimensions().cols / 3) }),
+						relative
+					)
+				end
+			end
+		end),
+	},
+	{
+		key = "j",
+		mods = "LEADER",
+		action = wezterm.action_callback(function(window, pane)
+			local relative = get_relative_pane(window, "Down")
+			if relative then
+				window:perform_action(
+					action.AdjustPaneSize({ "Down", math.floor(relative:get_dimensions().viewport_rows / 3) }),
+					pane
+				)
+			else
+				relative = get_relative_pane(window, "Up")
+				if relative then
+					window:perform_action(
+						action.AdjustPaneSize({ "Down", math.floor(pane:get_dimensions().viewport_rows / 3) }),
+						relative
+					)
+				end
+			end
+		end),
+	},
+
+	{
+		key = "k",
+		mods = "LEADER",
+		action = wezterm.action_callback(function(window, pane)
+			local relative = get_relative_pane(window, "Up")
+			if relative then
+				window:perform_action(
+					action.AdjustPaneSize({ "Up", math.floor(relative:get_dimensions().viewport_rows / 3) }),
+					pane
+				)
+			else
+				relative = get_relative_pane(window, "Down")
+				if relative then
+					window:perform_action(
+						action.AdjustPaneSize({ "Up", math.floor(pane:get_dimensions().viewport_rows / 3) }),
+						relative
+					)
+				end
+			end
+		end),
+	},
+
+	{
+		key = "l",
+		mods = "LEADER",
+		action = wezterm.action_callback(function(window, pane)
+			local relative = get_relative_pane(window, "Right")
+			if relative then
+				window:perform_action(
+					action.AdjustPaneSize({ "Right", math.floor(relative:get_dimensions().cols / 3) }),
+					pane
+				)
+			else
+				relative = get_relative_pane(window, "Left")
+				if relative then
+					window:perform_action(
+						action.AdjustPaneSize({ "Right", math.floor(pane:get_dimensions().cols / 3) }),
+						relative
+					)
+				end
+			end
+		end),
+	},
+
+	{
+		key = "d",
+		mods = "LEADER|SHIFT",
+		action = action.ShowDebugOverlay,
 	},
 }
 
