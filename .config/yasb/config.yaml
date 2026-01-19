@@ -31,15 +31,15 @@ bars:
       bottom: -24
       right: 16
     widgets:
-      left: ["active_window","heater"]
+      left: ["active_window"]
       center: ["cpu","clock","memory"]
       right: ["traffic","weather","volume","power_menu"]
 widgets:
-  heater:
-    type: "yasb.heater.HeaterWidget"
-    options:
-      label: "<span>{icon}</span> {level}"
-      label_alt: "{volume}"
+  #heater:
+  #  type: "yasb.heater.HeaterWidget"
+  #  options:
+  #    label: "<span>{icon}</span> {level}"
+  #    label_alt: "{volume}"
   cpu:
     type: "yasb.cpu.CpuWidget"
     options:
